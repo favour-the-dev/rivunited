@@ -8,13 +8,13 @@ interface CardProps{
 function Card({imageSrc, NewsHeadline, Team}: CardProps) {
     return ( 
         <>
-            <div className="flex md:flex-col gap-2 md:gap-0 md:items-start w-full md:max-w-[350px] py-4 border-b border-opacity-85 md:border-none">
+            <div className="flex md:flex-col gap-2 md:gap-0 md:items-start md:w-full md:max-w-[350px] py-4 border-b border-opacity-85 md:border-none">
                 <Image
                 src={imageSrc}
                 alt=""
                 width={250}
                 height={250}
-                className="w-full"
+                className="md:w-full"
                 />
                 <div className="flex flex-col gap-1 w-full mt-2">
                     <p className="text-xs md:text-lg font-semibold text-blue-900 uppercase">{NewsHeadline}</p>
