@@ -8,6 +8,7 @@ import home from "../../../../assets/clublogo.png";
 import away from '../../../../assets/awaylogo.png';
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { Key } from "react";
 function News() {
     
     const [lastFixtures, setLastFixtures] = useState<any[]>([]);
@@ -48,6 +49,26 @@ function News() {
         })
         const data = response.data.response;
         return data;
+    }
+
+    interface Fixture {
+    fixture: {
+        date: string;
+        timezone: string;
+    };
+    league: {
+        name: string;
+    };
+    teams: {
+        home: {
+        logo: string;
+        name: string;
+        };
+        away: {
+        logo: string;
+        name: string;
+        };
+    };
     }
     useEffect(()=>{
         fetchNewsHeadlines()
@@ -95,7 +116,7 @@ function News() {
                 <div className="flex flex-col gap-2 bg-gray-100 bg-opacity-75 md:bg-transparent p-3 md:p-0">
                     <h2 className="text-blue-950 font-bold text-xl my-4 md:hidden">FIXTURES & RESULTS</h2>
                     {
-                        nextFixture.map((nextFi, index)=>{
+                        nextFixture.map((nextFi:Fixture, index: Key)=>{
                             return(
                                 <LatestFixture
                                 fixtureDate={new Date(nextFi.fixture.date).toDateString()}
