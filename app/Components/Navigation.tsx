@@ -19,7 +19,7 @@ function Navigation() {
                     alt="logo"
                     width={70}
                     height={70}
-                    className="rounded-full hidden lg:block"
+                    className="rounded-full hidden md:block"
                     />
                     <Image
                     src={logo}
@@ -28,7 +28,7 @@ function Navigation() {
                     height={50}
                     className="rounded-full sm:hidden"
                     />
-                    <p className="text-blue-200 font-semibold text-xl hidden lg:block">RIVERS UNITED F.C</p>
+                    <p className="text-blue-200 font-semibold text-xl hidden lg:block">RIVERS UNITED</p>
                 </div>
                 {/* desktop views */}
                 <div className="lg:flex items-center gap-12 w-3/4 hidden">

@@ -12,6 +12,22 @@ function News() {
     
     const [lastFixtures, setLastFixtures] = useState<any[]>([]);
     const [nextFixture, setNextFixture] = useState<any>([]);
+    const [newsHeadlines, setNewsHeadLines] = useState<any[]>([]);
+    async function fetchNewsHeadlines(){
+        const response = await axios.get('https://google-news22.p.rapidapi.com/v1/search', {
+            params: {
+                q: 'Rivers United',
+                country: 'ng',
+                language: 'en',
+            },
+            headers: {
+                'x-rapidapi-key': '788d4c2c7cmsh6d917adc023661ep1519b7jsn94278f9cec63',
+                'x-rapidapi-host': 'google-news22.p.rapidapi.com'
+            }
+        })
+        const data = response.data.data;
+        return data
+    }
     async function fetchLastFixtures(){
         // 5192
         const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&last=1`, {
@@ -34,9 +50,15 @@ function News() {
         return data;
     }
     useEffect(()=>{
+        fetchNewsHeadlines()
+        .then((data)=>{
+            setNewsHeadLines(data.slice(0, 4))
+        }).catch((err)=>{
+            console.error(err)
+        })
+
         fetchNextFixture()
         .then((data)=>{
-            console.log(data)
             setNextFixture(data)
         }).catch((err)=>{
             console.error(err)
@@ -53,26 +75,18 @@ function News() {
         <>
             <section className="w-full max-w-[60rem] relative mx-auto mt-8 flex flex-col md:flex-row justify-between md:pb-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:w-2/3 p-3 md:p-0">
-                    <Card
-                    imageSrc={head1}
-                    NewsHeadline="Finidi George is appointed as Rivers United Manager"
-                    Team="Men's Team"
-                    />
-                    <Card
-                    imageSrc={head1}
-                    NewsHeadline="Finidi George is appointed as Rivers United Manager"
-                    Team="Men's Team"
-                    />
-                    <Card
-                    imageSrc={head1}
-                    NewsHeadline="Finidi George is appointed as Rivers United Manager"
-                    Team="Men's Team"
-                    />
-                    <Card
-                    imageSrc={head1}
-                    NewsHeadline="Finidi George is appointed as Rivers United Manager"
-                    Team="Men's Team"
-                    />
+                    {
+                        newsHeadlines.map((news, index)=>{
+                            return (
+                                <Card
+                                imageSrc={news.thumbnail}
+                                NewsHeadline={news.title}
+                                Team="Men's Team"
+                                key={index}
+                                />
+                            )
+                        })
+                    }
                     <button className="w-full flex justify-between items-center px-4 py-2 rounded-sm text-sm uppercase text-blue-950 border border-blue-950 hover:scale-105 ease-in-out duration-150 md:hidden">
                         <span className="font-semibold">More News</span>
                         <span className="font-semibold text-xl">→</span>
