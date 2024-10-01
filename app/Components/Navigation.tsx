@@ -6,6 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiMenu2Line } from "react-icons/ri";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
+import { CiGlobe } from "react-icons/ci";
 function Navigation() {
     const [toggleNav, setToggleNav] = useState<boolean>(false);
     return ( 
@@ -27,23 +28,22 @@ function Navigation() {
                     height={50}
                     className="rounded-full sm:hidden"
                     />
-                    <p className="text-blue-200 font-semibold text-2xl hidden lg:block">RIVERS UNITED F.C</p>
+                    <p className="text-blue-200 font-semibold text-xl hidden lg:block">RIVERS UNITED F.C</p>
                 </div>
                 {/* desktop views */}
                 <div className="lg:flex items-center gap-12 w-3/4 hidden">
                     <div className="flex items-center gap-3 text-xl uppercase font-semibold text-white">
-                        <Link href='/'>News</Link>
-                        <Link href='/'>Fixtures</Link>
-                        <Link href='/'>Video</Link>
-                        <Link href='/'>Tickets</Link>
-                        <Link href='/'>Players</Link>
-                        <Link href='/'>Club</Link>
-                        <Link href='/'>Shop</Link>
+                        <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">News</Link>
+                        <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Fixtures</Link>
+                        <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Video</Link>
+                        <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Tickets</Link>
+                        <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Players</Link>
+                        <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Club</Link>
+                        <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Shop</Link>
                     </div>
                     <div className="flex items-center gap-3 text-blue-200 uppercase font-semibold whitespace-nowrap cursor-pointer">
-                        <span className="">EN |</span>
-                        <Link className="" href=''>Login |</Link>
-                        <span className="">Sponsor |</span>
+                        <span className="flex items-center gap-1 hover:scale-105"><CiGlobe /> EN |</span>
+                        <Link className="flex items-center gap-1 hover:scale-105" href=''><CgProfile className="text-xl"/> Login </Link>
                     </div>
                 </div>
                 {/* mobile views */}
@@ -65,13 +65,13 @@ function Navigation() {
                                 }}/>
                             </div>
                             <div className="flex flex-col items-start gap-4 text-xl text-white uppercase font-semibold">
-                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2">News</Link>
-                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2">Fixtures</Link>
-                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2">Video</Link>
-                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2">Tickets</Link>
-                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2">Players</Link>
-                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2">Club</Link>
-                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2">Shop</Link>
+                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2 hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">News</Link>
+                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2 hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Fixtures</Link>
+                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2 hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Video</Link>
+                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2 hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Tickets</Link>
+                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2 hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Players</Link>
+                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2 hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Club</Link>
+                                <Link href='/' className="border-b border-b-blue-200 border-b-opacity-50 w-full py-2 hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Shop</Link>
                             </div>
                         </div>
                     </div>

@@ -1,10 +1,54 @@
+"use client"
+
 import Card from "./Card";
 import head1 from '../../../../assets/headline-1.jpeg'
 import LatestFixture from "./Latest";
 import LastFixture from "./Last";
 import home from "../../../../assets/clublogo.png";
 import away from '../../../../assets/awaylogo.png';
+import { useState, useEffect } from "react";
+import axios from 'axios';
 function News() {
+    
+    const [lastFixtures, setLastFixtures] = useState<any[]>([]);
+    const [nextFixture, setNextFixture] = useState<any>([]);
+    async function fetchLastFixtures(){
+        // 5192
+        const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&last=1`, {
+            headers: {
+                "x-rapidapi-host": "v3.football.api-sports.io",
+                "x-rapidapi-key": "5f911553d0d0b1c86c3daa2641fe6a71"
+            }
+        })
+        const data = response.data.response;
+        return data;
+    }
+    const fetchNextFixture = async ()=>{
+        const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&next=1`, {
+            headers: {
+                "x-rapidapi-host": "v3.football.api-sports.io",
+                "x-rapidapi-key": "5f911553d0d0b1c86c3daa2641fe6a71"
+            }
+        })
+        const data = response.data.response;
+        return data;
+    }
+    useEffect(()=>{
+        fetchNextFixture()
+        .then((data)=>{
+            console.log(data)
+            setNextFixture(data)
+        }).catch((err)=>{
+            console.error(err)
+        })
+        
+        fetchLastFixtures()
+        .then((data)=>{
+            setLastFixtures(data)
+        }).catch((err)=>{
+            console.error(err)
+        })
+    }, [])
     return ( 
         <>
             <section className="w-full max-w-[60rem] relative mx-auto mt-8 flex flex-col md:flex-row justify-between md:pb-12">
@@ -36,26 +80,40 @@ function News() {
                 </div>
                 <div className="flex flex-col gap-2 bg-gray-100 bg-opacity-75 md:bg-transparent p-3 md:p-0">
                     <h2 className="text-blue-950 font-bold text-xl my-4 md:hidden">FIXTURES & RESULTS</h2>
-                    <LatestFixture
-                    fixtureDate="Sun 30 Sep"
-                    competition="NFL"
-                    time="15:00"
-                    timeZone="WAT"
-                    homeClubLogo={home}
-                    homeTeamName="Rivers United"
-                    awayClubLogo={away}
-                    awayTeamName="Enyimba Fc"
-                    />
-                    <LastFixture
-                    fixtureDate="Sun 30 Sep"
-                    competition="NFL"
-                    homeScore="2"
-                    awayScore="1"
-                    homeClubLogo={home}
-                    homeTeamName="Rivers United"
-                    awayClubLogo={away}
-                    awayTeamName="Enyimba Fc"
-                    />
+                    {
+                        nextFixture.map((nextFi, index)=>{
+                            return(
+                                <LatestFixture
+                                fixtureDate={new Date(nextFi.fixture.date).toDateString()}
+                                competition={nextFi.league.name}
+                                time={new Date(nextFi.fixture.date).toTimeString().slice(0, 5)}
+                                timeZone={nextFi.fixture.timezone}
+                                homeClubLogo={nextFi.teams.home.logo}
+                                homeTeamName={nextFi.teams.home.name}
+                                awayClubLogo={nextFi.teams.away.logo}
+                                awayTeamName={nextFi.teams.away.name}
+                                key={index}
+                                />
+                            )
+                        })
+                    }
+                    {
+                        lastFixtures.map((lastFi, index)=>{
+                            return (
+                                <LastFixture
+                                fixtureDate={new Date(lastFi.fixture.date).toDateString()}
+                                competition={lastFi.league.name}
+                                homeScore={lastFi.goals.home}
+                                awayScore={lastFi.goals.away}
+                                homeClubLogo={lastFi.teams.home.logo}
+                                homeTeamName={lastFi.teams.home.name}
+                                awayClubLogo={lastFi.teams.away.logo}
+                                awayTeamName={lastFi.teams.away.name}
+                                key={index}
+                                />
+                            )
+                        })
+                    }
                 </div>
                 <div className="absolute bottom-0 w-full items-center justify-center hidden md:flex">
                     <button className=" before:w-full before:h-[1px] before:bg-blue-950 before:absolute before:right-[100%] after:w-full after:h-[1px] after:bg-blue-950 after:absolute after:left-[100%] relative w-1/3 flex justify-between items-center px-4 py-2 rounded-sm text-sm uppercase text-blue-950 border border-blue-950 hover:scale-105 ease-in-out duration-150">
