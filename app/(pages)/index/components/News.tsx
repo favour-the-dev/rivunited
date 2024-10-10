@@ -69,7 +69,6 @@ function News() {
         name: string;
         };
     };
-    
     }
     useEffect(()=>{
         fetchNewsHeadlines()
