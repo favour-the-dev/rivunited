@@ -1,8 +1,8 @@
 "use client"
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import logo from '../../../../assets/Logo.jpeg'
 import axios from "axios"
+
 function Standings(){
     const [standings, setStandings] = useState<any[]>([])
     async function fetchStadnings(){
@@ -15,21 +15,20 @@ function Standings(){
         const data = response.data.response;
         return data
     }
+
     useEffect(()=>{
-        fetchStadnings()
-        .then((data)=>{
-            setStandings(data[0].league.standings)
-        })
-        .catch((err)=>{
+        fetchStadnings().then((data)=>{
+            setStandings(data[0].league.standings[0])
+        }).catch((err)=>{
             console.error(err)
         })
     }, [])
     return(
         <>
-            <div className="w-full max-w-[60rem] mx-auto mt-8 flex flex-col items-center justify-center p-3 overflow-x-scroll md:overflow-x-hidden">
+            <div className="w-full md:max-w-[60rem] mx-auto mt-8 flex flex-col md:items-center md:justify-center p-3 overflow-x-scroll md:overflow-x-hidden">
                 <h2 className="text-blue-900 font-bold text-xl my-4 self-start uppercase">Standings</h2>
-                <table className="w-full">
-                    <thead className="w-full text-blue-900">
+                <table className="min-w-[60rem]">
+                    <thead className="w-full text-blue-900 mb-2">
                         <tr className="w-full whitespace-nowrap flex items-start justify-between">
                             <th className="w-1/3 px-2">Club</th>
                             <th className="px-2">MP</th>
@@ -43,7 +42,7 @@ function Standings(){
                             <th className="w-1/5 px-2">Last 5</th>
                         </tr>
                     </thead>
-                    <tbody className="w-full text-gray-600">
+                    <tbody className="w-full text-gray-600 flex flex-col gap-2">
                         {
                             standings.map((standing, index)=>{
                                 return (
@@ -57,7 +56,7 @@ function Standings(){
                                                 width={25}
                                                 height={25}
                                                 />
-                                                <span>{standing.team.name}</span>
+                                                <span className="">{standing.team.name}</span>
                                             </span>
                                         </td>
                                         <td className="">{standing.all.played}</td>
