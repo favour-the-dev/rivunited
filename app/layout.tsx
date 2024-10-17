@@ -3,6 +3,7 @@ import Head from "next/head";
 import "./globals.css";
 import Navigation from "./Components/Navigation";
 import Footer from "./Components/Footer";
+import AppContext from "./Context";
 import { Poppins } from 'next/font/google'
 
 const poppins = Poppins({
@@ -29,9 +30,11 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
-        <Navigation/>
-        {children}
-        <Footer/>
+        <AppContext>
+          <Navigation/>
+          {children}
+          <Footer/>
+        </AppContext>
       </body>
     </html>
   );

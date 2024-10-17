@@ -7,6 +7,7 @@ import LastFixture from "./Last";
 import home from "../../../../assets/clublogo.png";
 import away from '../../../../assets/awaylogo.png';
 import { useState, useEffect } from "react";
+import { AppState } from "@/app/state/State";
 import axios from 'axios';
 import { Key } from "react";
 function News() {
@@ -14,41 +15,64 @@ function News() {
     const [lastFixtures, setLastFixtures] = useState<any[]>([]);
     const [nextFixture, setNextFixture] = useState<any>([]);
     const [newsHeadlines, setNewsHeadLines] = useState<any[]>([]);
+    const SetAppLoading = AppState((state)=> state.setLoading);
     async function fetchNewsHeadlines(){
-        const response = await axios.get('https://google-news22.p.rapidapi.com/v1/search', {
-            params: {
-                q: 'Rivers United',
-                country: 'ng',
-                language: 'en',
-            },
-            headers: {
-                'x-rapidapi-key': '788d4c2c7cmsh6d917adc023661ep1519b7jsn94278f9cec63',
-                'x-rapidapi-host': 'google-news22.p.rapidapi.com'
-            }
-        })
-        const data = response.data.data;
-        return data
+        try{
+            SetAppLoading(true)
+            const response = await axios.get('https://google-news22.p.rapidapi.com/v1/search', {
+                params: {
+                    q: 'Rivers United',
+                    country: 'ng',
+                    language: 'en',
+                },
+                headers: {
+                    'x-rapidapi-key': '788d4c2c7cmsh6d917adc023661ep1519b7jsn94278f9cec63',
+                    'x-rapidapi-host': 'google-news22.p.rapidapi.com'
+                }
+            })
+            const data = response.data.data;
+            SetAppLoading(false)
+            return data
+        }catch(err){
+            SetAppLoading(false)
+            console.error(err)
+        }
     }
+
     async function fetchLastFixtures(){
         // 5192
-        const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&last=1`, {
-            headers: {
-                "x-rapidapi-host": "v3.football.api-sports.io",
-                "x-rapidapi-key": "5f911553d0d0b1c86c3daa2641fe6a71"
-            }
-        })
-        const data = response.data.response;
-        return data;
+        try{
+            SetAppLoading(true)
+            const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&last=1`, {
+                headers: {
+                    "x-rapidapi-host": "v3.football.api-sports.io",
+                    "x-rapidapi-key": "5f911553d0d0b1c86c3daa2641fe6a71"
+                }
+            })
+            const data = response.data.response;
+            SetAppLoading(false)
+            return data;
+        }catch(err){
+            SetAppLoading(false)
+            console.error(err)
+        }
     }
     const fetchNextFixture = async ()=>{
-        const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&next=1`, {
-            headers: {
-                "x-rapidapi-host": "v3.football.api-sports.io",
-                "x-rapidapi-key": "5f911553d0d0b1c86c3daa2641fe6a71"
-            }
-        })
-        const data = response.data.response;
-        return data;
+        try{
+            SetAppLoading(true)
+            const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&next=1`, {
+                headers: {
+                    "x-rapidapi-host": "v3.football.api-sports.io",
+                    "x-rapidapi-key": "5f911553d0d0b1c86c3daa2641fe6a71"
+                }
+            })
+            const data = response.data.response;
+            SetAppLoading(false)
+            return data;
+        }catch(err){
+            SetAppLoading(false)
+            console.error(err)
+        }
     }
 
     interface Fixture {

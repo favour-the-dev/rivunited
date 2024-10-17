@@ -2,18 +2,26 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import axios from "axios"
-
+import { AppState } from "@/app/state/State"
 function Standings(){
+    const setLoading = AppState((state)=> state.setLoading)
     const [standings, setStandings] = useState<any[]>([])
     async function fetchStadnings(){
-        const response = await axios.get("https://v3.football.api-sports.io/standings?league=399&season=2022", {
-            headers: {
-                "x-rapidapi-host": "v3.football.api-sports.io",
-                "x-rapidapi-key": "5f911553d0d0b1c86c3daa2641fe6a71"
-            }
-        })
-        const data = response.data.response;
-        return data
+        try{
+            setLoading(true)
+            const response = await axios.get("https://v3.football.api-sports.io/standings?league=399&season=2022", {
+                headers: {
+                    "x-rapidapi-host": "v3.football.api-sports.io",
+                    "x-rapidapi-key": "5f911553d0d0b1c86c3daa2641fe6a71"
+                }
+            })
+            const data = response.data.response;
+            setLoading(false)
+            return data
+        }catch(err){
+            setLoading(false)
+            console.error(err)
+        }
     }
 
     useEffect(()=>{
