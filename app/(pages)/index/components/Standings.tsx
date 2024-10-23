@@ -4,11 +4,11 @@ import Image from "next/image"
 import axios from "axios"
 import { AppState } from "@/app/state/State"
 function Standings(){
-    const setLoading = AppState((state)=> state.setLoading)
+    // const setLoading = AppState((state)=> state.setLoading)
     const [standings, setStandings] = useState<any[]>([])
     async function fetchStadnings(){
         try{
-            setLoading(true)
+            // setLoading(true)
             const response = await axios.get("https://v3.football.api-sports.io/standings?league=399&season=2022", {
                 headers: {
                     "x-rapidapi-host": "v3.football.api-sports.io",
@@ -16,10 +16,10 @@ function Standings(){
                 }
             })
             const data = response.data.response;
-            setLoading(false)
+            // setLoading(false)
             return data
         }catch(err){
-            setLoading(false)
+            // setLoading(false)
             console.error(err)
         }
     }

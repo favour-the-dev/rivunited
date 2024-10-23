@@ -15,10 +15,10 @@ function News() {
     const [lastFixtures, setLastFixtures] = useState<any[]>([]);
     const [nextFixture, setNextFixture] = useState<any>([]);
     const [newsHeadlines, setNewsHeadLines] = useState<any[]>([]);
-    const SetAppLoading = AppState((state)=> state.setLoading);
+    // const SetAppLoading = AppState((state)=> state.setLoading);
     async function fetchNewsHeadlines(){
         try{
-            SetAppLoading(true)
+            // SetAppLoading(true)
             const response = await axios.get('https://google-news22.p.rapidapi.com/v1/search', {
                 params: {
                     q: 'Rivers United',
@@ -31,10 +31,10 @@ function News() {
                 }
             })
             const data = response.data.data;
-            SetAppLoading(false)
+            // SetAppLoading(false)
             return data
         }catch(err){
-            SetAppLoading(false)
+            // SetAppLoading(false)
             console.error(err)
         }
     }
@@ -42,7 +42,7 @@ function News() {
     async function fetchLastFixtures(){
         // 5192
         try{
-            SetAppLoading(true)
+            // SetAppLoading(true)
             const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&last=1`, {
                 headers: {
                     "x-rapidapi-host": "v3.football.api-sports.io",
@@ -50,16 +50,16 @@ function News() {
                 }
             })
             const data = response.data.response;
-            SetAppLoading(false)
+            // SetAppLoading(false)
             return data;
         }catch(err){
-            SetAppLoading(false)
+            // SetAppLoading(false)
             console.error(err)
         }
     }
     const fetchNextFixture = async ()=>{
         try{
-            SetAppLoading(true)
+            // SetAppLoading(true)
             const response = await axios.get(`https://v3.football.api-sports.io/fixtures?team=5192&next=1`, {
                 headers: {
                     "x-rapidapi-host": "v3.football.api-sports.io",
@@ -67,10 +67,10 @@ function News() {
                 }
             })
             const data = response.data.response;
-            SetAppLoading(false)
+            // SetAppLoading(false)
             return data;
         }catch(err){
-            SetAppLoading(false)
+            // SetAppLoading(false)
             console.error(err)
         }
     }
