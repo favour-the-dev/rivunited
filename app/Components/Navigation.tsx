@@ -13,7 +13,7 @@ function Navigation() {
         <>  
         <nav className="bg-blue-900 p-3 relative">
             <div className="max-w-[60rem] w-full mx-auto flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <Link href={`/`} className="flex items-center gap-2">
                     <Image
                     src={logo}
                     alt="logo"
@@ -29,7 +29,7 @@ function Navigation() {
                     className="rounded-full sm:hidden"
                     />
                     <p className="text-blue-200 font-semibold text-xl hidden lg:block">RIVERS UNITED</p>
-                </div>
+                </Link>
                 {/* desktop views */}
                 <div className="lg:flex items-center gap-12 w-3/4 hidden">
                     <div className="flex items-center gap-3 text-xl uppercase font-semibold text-white">
@@ -37,13 +37,13 @@ function Navigation() {
                         <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Fixtures</Link>
                         <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Video</Link>
                         <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Tickets</Link>
-                        <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Players</Link>
+                        <Link href='/players' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Players</Link>
                         <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Club</Link>
                         <Link href='/' className="hover:text-orange-500 hover:scale-105 duration-150 ease-in-out">Shop</Link>
                     </div>
                     <div className="flex items-center gap-3 text-blue-200 uppercase font-semibold whitespace-nowrap cursor-pointer">
                         <span className="flex items-center gap-1 hover:scale-105"><CiGlobe /> EN |</span>
-                        <Link className="flex items-center gap-1 hover:scale-105" href=''><CgProfile className="text-xl"/> Login </Link>
+                        <Link className="flex items-center gap-1 hover:scale-105" href='/login'><CgProfile className="text-xl"/> Login </Link>
                     </div>
                 </div>
                 {/* mobile views */}

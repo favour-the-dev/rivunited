@@ -24,5 +24,10 @@ body {
 }
 
 @layer utilities {
-  
+  .authcont{
+    background-image: url('../assets/authbanner.jpeg');
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: cover;
+  }
 }
